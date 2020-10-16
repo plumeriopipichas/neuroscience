@@ -42,14 +42,18 @@ nx.draw(g, with_labels=True)
 :end:
 
 #+begin_src ipython
-g.nodes()
+g.nodes(data=True)
 #+end_src
 
-#+RESULTS[16336f810409a21eda7a50ba2b85d330af5640c1]:
+#+RESULTS[bd13d3721e463471040d6169a6e89238334d967a]:
 :results:
-# Out[4]:
-: NodeView(('n0', 'n1', 'n2', 'n3', 'n4', 'n5', 'n6', 'n7', 'n8', 'n9', 'n10', 'n11', 'n12', 'n13', 'n14', 'n15', 'n16', 'n17', 'n18', 'n19', 'n20', 'n21', 'n22', 'n23', 'n24', 'n25', 'n26', 'n27', 'n28', 'n29', 'n30', 'n31', 'n32', 'n33', 'n34', 'n35', 'n36', 'n37', 'n38', 'n39', 'n40', 'n41', 'n42', 'n43', 'n44', 'n45', 'n46', 'n47', 'n48', 'n49'))
+# Out[6]:
+: NodeDataView({'n0': {'name': 'M1'}, 'n1': {'name': 'I2L'}, 'n2': {'name': 'I1L'}, 'n3': {'name': 'M2R'}, 'n4': {'name': 'I3'}, 'n5': {'name': 'I2R'}, 'n6': {'name': 'MI'}, 'n7': {'name': 'I1R'}, 'n8': {'name': 'M5'}, 'n9': {'name': 'M3L'}, 'n10': {'name': 'I6'}, 'n11': {'name': 'MCR'}, 'n12': {'name': 'M4'}, 'n13': {'name': 'NSMR'}, 'n14': {'name': 'I4'}, 'n15': {'name': 'M3R'}, 'n16': {'name': 'I5'}, 'n17': {'name': 'M2L'}, 'n18': {'name': 'MCL'}, 'n19': {'name': 'NSML'}, 'n20': {'name': 'pm1VL'}, 'n21': {'name': 'pm1D'}, 'n22': {'name': 'pm3VL'}, 'n23': {'name': 'e2VL'}, 'n24': {'name': 'e3VL'}, 'n25': {'name': 'pm3D'}, 'n26': {'name': 'g1D'}, 'n27': {'name': 'e3D'}, 'n28': {'name': 'pm2DL'}, 'n29': {'name': 'pm2DR'}, 'n30': {'name': 'pm1VR'}, 'n31': {'name': 'e3VR'}, 'n32': {'name': 'pm3VR'}, 'n33': {'name': 'pm2VRL'}, 'n34': {'name': 'pm4'}, 'n35': {'name': 'pm5'}, 'n36': {'name': 'mc2DR'}, 'n37': {'name': 'E3D'}, 'n38': {'name': 'mc2DL'}, 'n39': {'name': 'mc2V'}, 'n40': {'name': 'g1VR'}, 'n41': {'name': 'pm6VR'}, 'n42': {'name': 'mc3DR'}, 'n43': {'name': 'g1VL'}, 'n44': {'name': 'mc3DL'}, 'n45': {'name': 'pm6VL'}, 'n46': {'name': 'mc3V'}, 'n47': {'name': 'bm'}, 'n48': {'name': 'e1D'}, 'n49': {'name': 'pm8'}})
 :end:
+
+#+begin_src ipython
+g.edges()
+#+end_src
 
 
 

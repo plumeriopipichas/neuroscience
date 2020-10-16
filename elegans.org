@@ -1,0 +1,58 @@
+#+title: Ejemplos
+
+#+property: header-args:ipython :exports both :cache yes :session neuroscience :results raw drawer
+#+startup: inlineimages
+
+Los archivos fueron obtenidos de https://neurodata.io/project/connectomes/
+
+#+begin_src ipython
+import networkx as nx
+import matplotlib.pyplot as plt
+#+end_src
+
+#+RESULTS[3cf5bce07e70d4ac3fc107efd5e94654e48802ea]:
+:results:
+# Out[1]:
+:end:
+
+#+begin_src ipython
+g = nx.read_graphml("c.elegans_neural.male_1.graphml")
+
+plt.figure(figsize=(20, 20))
+nx.draw(g, with_labels=True)
+#+end_src
+
+#+RESULTS[686428face61c887067a38a6d3c36c8bb75336ab]:
+:results:
+# Out[2]:
+[[file:./obipy-resources/In3q0x.png]]
+:end:
+
+#+begin_src ipython
+g = nx.read_graphml("p.pacificus_neural.synaptic_2.graphml")
+
+plt.figure(figsize=(15, 15))
+nx.draw(g, with_labels=True)
+#+end_src
+
+#+RESULTS[e317ef0a51f0224044b4b1aae139750c2cadb93e]:
+:results:
+# Out[3]:
+[[file:./obipy-resources/4ivXm6.png]]
+:end:
+
+#+begin_src ipython
+g.nodes()
+#+end_src
+
+#+RESULTS[16336f810409a21eda7a50ba2b85d330af5640c1]:
+:results:
+# Out[4]:
+: NodeView(('n0', 'n1', 'n2', 'n3', 'n4', 'n5', 'n6', 'n7', 'n8', 'n9', 'n10', 'n11', 'n12', 'n13', 'n14', 'n15', 'n16', 'n17', 'n18', 'n19', 'n20', 'n21', 'n22', 'n23', 'n24', 'n25', 'n26', 'n27', 'n28', 'n29', 'n30', 'n31', 'n32', 'n33', 'n34', 'n35', 'n36', 'n37', 'n38', 'n39', 'n40', 'n41', 'n42', 'n43', 'n44', 'n45', 'n46', 'n47', 'n48', 'n49'))
+:end:
+
+
+
+# Local Variables:
+# org-confirm-babel-evaluate: nil
+# End:

@@ -1,0 +1,244 @@
+#+title: Gráficas de visibilidad
+
+#+property: header-args:ipython :exports both :cache yes :session neuroscience :results raw drawer
+#+startup: inlineimages
+
+#+begin_src ipython
+import networkx as nx
+import matplotlib.pyplot as plt
+from pycliques.visibility import visibility_graph
+from pycliques.dominated import completely_pared_graph, complete_s_collapse
+#+end_src
+
+#+RESULTS[1574771a151864084186084376b7f015458edb87]:
+:results:
+# Out[1]:
+:end:
+
+#+begin_src ipython
+def logistic_time_series(iterations=50, start=0.3, parameter=3.8):
+    def f(x):
+        return parameter*x*(1-x)
+    vals = [start]
+    for i in range(iterations):
+        new = vals[-1]
+        vals.append(f(new))
+    return vals
+#+end_src
+
+#+RESULTS[e51960a182dc81cc1d939e014a5920027cf36154]:
+:results:
+# Out[7]:
+:end:
+
+#+begin_src ipython
+plt.figure(figsize=(10,5))
+plt.axis([-1,iteraciones+1,0,1])
+plt.grid(True)
+vals = logistic_time_series(start=0.8)
+plt.bar(range(len(vals)),
+        vals,
+        width=0.2,
+        align='center')
+plt.show()
+#+end_src
+
+#+RESULTS[addfd4711c678034899d8ff8da3b3a4d761916f3]:
+:results:
+# Out[12]:
+[[file:./obipy-resources/8rHXp1.png]]
+:end:
+
+#+begin_src ipython
+g = visibility_graph(vals)
+nx.draw(g, with_labels=True)
+#+end_src
+
+#+RESULTS[a2db69e14f0d340596b7ce02d7af70bd3c18db72]:
+:results:
+# Out[13]:
+[[file:./obipy-resources/BGrjnI.png]]
+:end:
+
+#+begin_src ipython
+cpg = completely_pared_graph(g)
+cpg.order()
+#+end_src
+
+#+RESULTS[c4e17700e97cbe6dffca7f9a6e108c73dff69e97]:
+:results:
+# Out[14]:
+: 1
+:end:
+
+#+begin_src ipython
+vals = logistic_time_series(iterations=200, start=0.8, parameter=3.4)
+g = visibility_graph(vals)
+cpg = completely_pared_graph(g)
+cpg.order()
+#+end_src
+
+#+RESULTS[b847dd9b89c73723429d47376070e1b7e1cb339e]:
+:results:
+# Out[26]:
+: 1
+:end:
+
+
+#+begin_src ipython
+def file_to_time_series(filename):
+    with open(filename) as f:
+        content = f.readlines()
+    content = [x.strip() for x in content] 
+    content = [float(x) for x in content] 
+    return content
+#+end_src
+
+#+RESULTS[e912c134c1a6f7baf2220099b0af7d72784a84a2]:
+:results:
+# Out[33]:
+:end:
+
+#+begin_src ipython
+time_series = file_to_time_series("./SampleSegments/Non-sigh_1.txt")
+len(time_series)
+#+end_src
+
+#+RESULTS[4c4a9fc19bb525e418bc1861d5810e87d2e6d5c2]:
+:results:
+# Out[38]:
+: 2616
+:end:
+
+#+begin_src ipython
+g = visibility_graph(time_series)
+#+end_src
+
+#+RESULTS[360febd85af32f764511196e1069c1a7c83b794f]:
+:results:
+# Out[3]:
+:end:
+
+#+begin_src ipython
+nx.draw(g, with_labels=True)
+#+end_src
+
+#+RESULTS[66fa7dcd6033cf3ebdb604afe33cdf08c054d440]:
+:results:
+# Out[8]:
+[[file:./obipy-resources/PJ8RXI.png]]
+:end:
+
+#+begin_src ipython
+time_series2 = [time_series[i] for i in range(len(time_series)) if i % 10 == 0] 
+len(time_series2)
+#+end_src
+
+#+RESULTS[1ce7234219c2484d448a571b3ba4b48267ebb06d]:
+:results:
+# Out[39]:
+: 262
+:end:
+
+#+begin_src ipython
+g = visibility_graph(time_series2)
+nx.draw(g, with_labels=True)
+#+end_src
+
+#+RESULTS[18017ba5b94fcbdc3b4414de255bcdb89b111ea3]:
+:results:
+# Out[31]:
+[[file:./obipy-resources/MBrZAL.png]]
+:end:
+
+
+#+begin_src ipython
+cpg = completely_pared_graph(g)
+cpg.order()
+#+end_src
+
+#+RESULTS[c4e17700e97cbe6dffca7f9a6e108c73dff69e97]:
+:results:
+# Out[32]:
+: 1
+:end:
+
+#+begin_src ipython
+time_series = file_to_time_series("./SampleSegments/Sigh_2.txt")
+len(time_series)
+#+end_src
+
+#+RESULTS[9efac8705f7684b5464aba2a4a86b28e16c49879]:
+:results:
+# Out[40]:
+: 3905
+:end:
+
+#+begin_src ipython
+time_series2 = [time_series[i] for i in range(len(time_series)) if i % 10 == 0] 
+len(time_series2)
+#+end_src
+
+#+RESULTS[1ce7234219c2484d448a571b3ba4b48267ebb06d]:
+:results:
+# Out[41]:
+: 391
+:end:
+
+#+begin_src ipython
+g = visibility_graph(time_series2)
+#+end_src
+
+#+RESULTS[888a2a95983c131237960a36eab2afe9d578cf79]:
+:results:
+# Out[42]:
+:end:
+
+#+begin_src ipython
+cpg = completely_pared_graph(g)
+cpg.order()
+#+end_src
+
+#+RESULTS[c4e17700e97cbe6dffca7f9a6e108c73dff69e97]:
+:results:
+# Out[43]:
+: 1
+:end:
+
+#+begin_src ipython
+import numpy as np
+from scipy.spatial import ConvexHull, convex_hull_plot_2d
+
+plt.figure(figsize=(20,12))
+plt.axis([-1,iteraciones+1,0,1])
+plt.grid(True)
+vals = logistic_time_series(start=0.2)
+plt.bar(range(len(vals)),
+        vals,
+        width=0.2,
+        align='center')
+points = [(i, vals[i]) for i in range(len(vals))]
+points.append((0,0))
+points.append((len(vals)-1,0))
+points = np.array(points)
+hull = ConvexHull(points)
+print("simplices={}, vertices={}".format(hull.simplices, hull.vertices))
+plt.plot(vals, 'ro')
+outline_color = 'green'
+for simplex in hull.simplices:
+    print("simplex={}, ps0={}, ps1={}".format(simplex,points[simplex,0], points[simplex,1]))
+    plt.plot(points[simplex, 0], points[simplex, 1], '-', linewidth=5, color=outline_color)
+plt.plot(vals, '-', linewidth=5, color=outline_color)
+plt.show()
+#+end_src
+
+#+RESULTS[1f7a3206281890f0f513e7223ad5280fc9c85013]:
+:results:
+# Out[76]:
+[[file:./obipy-resources/0pIcgM.png]]
+:end:
+
+
+# Local Variables:
+# org-confirm-babel-evaluate: nil
+# End:

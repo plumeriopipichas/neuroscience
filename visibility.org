@@ -32,10 +32,11 @@ def logistic_time_series(iterations=50, start=0.3, parameter=3.8):
 :end:
 
 #+begin_src ipython
+iters = 50
 plt.figure(figsize=(10,5))
-plt.axis([-1,iteraciones+1,0,1])
+plt.axis([-1,iters+1,0,1])
 plt.grid(True)
-vals = logistic_time_series(start=0.8)
+vals = logistic_time_series(start=0.8, iterations=iters)
 plt.bar(range(len(vals)),
         vals,
         width=0.2,
@@ -209,10 +210,11 @@ cpg.order()
 import numpy as np
 from scipy.spatial import ConvexHull, convex_hull_plot_2d
 
+iters = 50
 plt.figure(figsize=(20,12))
-plt.axis([-1,iteraciones+1,0,1])
+plt.axis([-1,iters+1,0,1])
 plt.grid(True)
-vals = logistic_time_series(start=0.2)
+vals = logistic_time_series(start=0.2, iterations=iters)
 plt.bar(range(len(vals)),
         vals,
         width=0.2,
